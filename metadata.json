@@ -1,0 +1,20 @@
+{
+    "name": "frankiethekneeman-node_versioning"
+    "version": "0.0.1",
+    "author": "Francis J.. Van Wetering IV",
+    "license": "MIT",
+    "summary": "Call your nodejs and NPM version.",
+    "source": "https://github.com/frankiethekneeman/puppet-node-versioning",
+    "project_page": "https://github.com/frankiethekneeman/puppet-node-versioning",
+    "issues_url": "https://github.com/frankiethekneeman/puppet-node-versioning/issues",
+    "tags": ["Node", "NPM", "NodeJS", "N"],
+    "operatingsystem_support": [
+        {
+            "operatingsystem":"CentOS",
+            "operatingsystemrelease":[ "6.0" ]
+        }
+     ]
+    , "dependencies": [
+        { "name": "puppetlabs/stdlib", "version_requirement": ">=3.2.0 <5.0.0" }
+    ]
+}

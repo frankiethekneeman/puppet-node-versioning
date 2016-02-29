@@ -3,12 +3,12 @@ class node_versioning (
     $npm_version = 'latest',
 ) {
 
-    exec {'Install n': 
+    exec {'Install n':
         command => 'curl https://raw.githubusercontent.com/tj/n/master/bin/n > /usr/bin/n && chmod +x /usr/bin/n',
         user => root,
         provider => shell,
         creates => '/usr/bin/n',
-    } -> 
+    } ->
     exec {'Install NodeJS':
         command => "n ${node_version} && n use ${node_version}",
         user => root,
@@ -28,11 +28,17 @@ class node_versioning (
         creates => '/usr/bin/npm',
         require => Exec['Install NodeJS'],
     }->
+    exec {'Ensure root user modifies /usr/local':
+        command   => "npm config set prefix /usr/local",
+        user      => root,
+        provider  => shell,
+        require => Exec['Link NodeJS'],
+        onlyif    => "[ \"x`npm config get prefix`\" != \"x/usr/local\" ]",
+    }->
     exec {'Ensure NPM Version':
         command   => "npm install -gf npm@${npm_version}",
         user      => root,
         provider  => shell,
-        require => Exec['Link NodeJS'],
         onlyif    => "[ \"`npm -v`\" != \"${npm_version}\" ]",
     }
 }

@@ -39,6 +39,6 @@ class node_versioning (
         command   => "npm install -gf npm@${npm_version}",
         user      => root,
         provider  => shell,
-        onlyif    => "[ \"`npm -v`\" != \"${npm_version}\" ]",
+        onlyif    => "[ \"`/usr/local/bin/npm -v`\" != \"${npm_version}\" ]",
     }
 }
